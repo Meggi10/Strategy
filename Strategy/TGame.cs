@@ -23,6 +23,7 @@ namespace Strategy
         public List<Image> GroundTiles;
         public List<Image> TilesImages;
         public List<Image> ResImages;
+        public List<Image> BinaryTiles;
         public List<Image> ArtifactImages;
         public EventHandler OnResourceChanged;
         public float CellAspect { get { return (float)TileHeight / TileWidth; } }
@@ -89,6 +90,7 @@ namespace Strategy
             var files = Directory.GetFiles(path + "/Tiles", "*.bmp");
             GroundTiles = new List<Image>();
             TilesImages = new List<Image>();
+            BinaryTiles = new List<Image>();
             for (int i = 0; i < files.Length; i++)
                 TilesImages.Add(ReadTexture(files[i]));
             files = Directory.GetFiles(path + "/Resources", "*.bmp");
