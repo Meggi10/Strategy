@@ -32,15 +32,18 @@ namespace Strategy
         public static int TileHeight = 64;
         public List<TColumn> TiledObjects = new List<TColumn>();
 
+        //zmieniony lekko kod
         public void ImportTiles(string filename)
         {
+            this.Clear();
+
             var map = new TDispelMap();
             map.Game = this;
             var ext = Path.GetExtension(filename);
+
             if (ext == ".btl" || ext == ".gtl")
             {
                 GroundTiles = map.LoadTileSet(filename, ext);
-                map.LoadTileSet(filename, ext);
                 map.MapTileSet();
             }
             else if (ext == ".map")
@@ -50,6 +53,13 @@ namespace Strategy
                 //bmp.Save("dispelMap.png");
             }
         }
+
+        public void Clear()
+        {
+            GroundTiles = null;
+            Map = null;
+        }
+        //koniec dodanego kodu
 
         TPlayer activePlayer;
         public TPlayer ActivePlayer
@@ -183,6 +193,11 @@ namespace Strategy
                         FreeCells.Add(cell);
                     Cells[y, x] = cell;
                 }
+        }
+
+        internal void ImportTiles(object filename)
+        {
+            throw new NotImplementedException();
         }
     }
 }

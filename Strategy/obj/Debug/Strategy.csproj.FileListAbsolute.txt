@@ -1,0 +1,12 @@
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.csproj.AssemblyReference.cache
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.csproj.SuggestedBindingRedirects.cache
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\bin\Debug\Strategy.exe.config
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\bin\Debug\Strategy.exe
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\bin\Debug\Strategy.pdb
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.StrategyForm.resources
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.Properties.Resources.resources
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.TBoard.resources
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.csproj.GenerateResource.cache
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.csproj.CoreCompileInputs.cache
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.exe
+C:\Users\magda\Desktop\Studia\Pr_inz\Projekt_2\Strategy-main\Strategy\obj\Debug\Strategy.pdb

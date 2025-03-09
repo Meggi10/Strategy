@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace Strategy
 {
     public partial class StrategyForm : Form
     {
         public float ScrollStep {  get { return 0.01f / Board.Zoom; } }
+        //ścieżka nie jest uniwersalna (działa tylko po wprowadzeniu odpowiedniej ścieżki do plików - własnej ścieżki)
+        //potem można pomyśleć jak zrobić ścieżkę uniwersalną, aby móc wczytywac pliki do wyboru z danego folderu na danym komputerze
+        private string folderPath = @"C:\Program Files (x86)\Dispel\Map";
+
 
         public StrategyForm()
         {
@@ -23,6 +30,10 @@ namespace Strategy
             Board.MouseWheel += TBoard1_MouseWheel;
             Board.Scroll += BoardScroll;
             Board.Game.OnResourceChanged = ResourceChanged;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            LoadFilesToComboBox1(folderPath);
+            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            comboBox1.DisplayMember= "Name";
         }
 
         private void BoardScroll(object sender, ScrollEventArgs e)
@@ -111,7 +122,7 @@ namespace Strategy
                 case Keys.T: ImportTiles(); break;
             }
         }
-
+        
         void ImportTiles()
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -119,6 +130,73 @@ namespace Strategy
                 Board.Game.ImportTiles(openFileDialog1.FileName);
                 Board.Invalidate();
             }
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        //dodany kod od tego momentu (poprawnie są wyświetlane nazwy plików w bieżącym katalogu)
+        private void LoadFilesToComboBox1(string folderPath)
+        {
+            if (Directory.Exists(folderPath))
+            {
+                comboBox1.Items.Clear();
+                string[] files = Directory.GetFiles(folderPath);
+
+                MessageBox.Show($"Znaleziono {files.Length} plików w folderze: {folderPath}"); //liczba plików, ale tak naprawdę tego nie musi tutaj być
+
+                if (files.Length > 0)
+                {
+                    foreach (string file in files)
+                    {
+                        comboBox1.Items.Add(Path.GetFileName(file)); // Dodanie samej nazwy pliku, zamiast całej ścieżki do niego
+                    }
+                }
+                else
+                {
+                    comboBox1.Items.Add("No files in this folder"); // W razie braku plików w folderze
+                }
+            }
+            else
+            {
+                comboBox1.Items.Add("Folder does not exist"); //W razie braku istnienia folderu
+            }
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                string selectedFile = comboBox1.SelectedItem.ToString();
+                string fullFilePath = Path.Combine(folderPath, selectedFile);
+
+                if (!File.Exists(fullFilePath))
+                {
+                    MessageBox.Show($"Błąd: Plik nie istnieje! {fullFilePath}");
+                    return;
+                }
+
+                if (selectedFile.EndsWith(".gtl") || selectedFile.EndsWith(".btl") || selectedFile.EndsWith(".map"))
+                {
+                    try
+                    {
+                        Board.Game.ImportTiles(fullFilePath); 
+                        Board.Invalidate();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Błąd wczytywania pliku: {ex.Message}");
+                    }
+                }
+            }
+        }
+        //tu się kończy dodany kod
+
+        private void Board_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

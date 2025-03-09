@@ -38,7 +38,7 @@ namespace Strategy
         public TBoard()
         {
             InitializeComponent();
-            DoubleBuffered = true;
+            this.DoubleBuffered = true; //tutaj w sumie moło zostać DoubleBuffered = true || tego this raczej nie musi być
             Game = new TGame();
             Game.Restart();
         }
@@ -268,5 +268,9 @@ namespace Strategy
 
         }
 
+        private void TBoard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
